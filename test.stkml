@@ -1,0 +1,50 @@
+<!DOCTYPE stkml SYSTEM "stkml2_1.dtd">
+<stkml static="yes">
+	<!-- Global huvisagch -->
+	<variable-list>		
+		<variable-ref>ceneglex-dugaar</variable-ref>
+		<variable-ref>send-data</variable-ref>
+		<variable-ref>splitChar</variable-ref>
+		<variable-ref>dun</variable-ref>
+		<variable-ref>splitChar</variable-ref>
+		<variable-ref>confirmTxt</variable-ref>
+		<variable-ref>askCode</variable-ref>
+		<variable-ref>endChar</variable-ref>
+		<variable-ref>USSDResult</variable-ref>
+    
+	</variable-list>
+  <!-- ******************   -->
+  <!-- Mobile dealer  -->
+  <!-- Ehnii huudas   -->
+  <!-- ******************   -->
+  <card id="0">
+    <init-variable>
+      <variable id="send-data" type ="hexa">68656C6F</variable>
+    </init-variable>
+    <concatenate id="send-data">
+      <text type="hexa">0F</text>
+      <variable-ref>send-data</variable-ref>
+    </concatenate>
+    <stk-command encapsulate="no">
+      <type>12</type>
+      <qualifier>00</qualifier>
+      <destination>83</destination>
+      <tlv id="0A" var-ref="send-data">
+        <!--data type="text" encoding-type="sms">*211#</data -->
+      </tlv>
+      <stk-result-variable-ref>USSDResult</stk-result-variable-ref>      
+    </stk-command>
+    <display>
+      <string>
+        <variable-ref>USSDResult</variable-ref>
+      </string>
+    </display>
+    <display>
+      <string>
+        <variable-ref>send-data</variable-ref>
+      </string>
+    </display>
+
+  </card>
+
+</stkml>

@@ -1,0 +1,15 @@
+#-------------------------------------------------
+JOB_DESCRIPTION_SECTION
+    .JobId      761:auto
+    .JobTitle   "MDealer"
+    .AppPathSfx "../CST/mb_ota/applets/mdealer/"
+    .MOEnabled  "true"
+    .ForProfile "all"
+    .MaxJobCT   "50"
+
+    APPLETS_DESCRIPTION_SECTION
+    .Send "001" "mtopup.rfm" "In:RFM" "Out:0348" "Del:true"  "WDel:true"  "" "SEC:_DES_:03.08.1200.00.10.B00010.R0000000001" "PRM:7F.F6"
+    .Send "1FF" "MDealer cesiig suulgalaa. Ta gar utsaa untraaj, asaana uu!" "In:InL" "Out:Text" "Del:true"  "WDel:true"
+    .Print "'Mobile Dealer menu installation for G+ Java cards' completed."
+    .Exit
+    #-- ----------------------------------------------

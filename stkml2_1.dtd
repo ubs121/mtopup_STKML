@@ -1,0 +1,321 @@
+<!--
+XML document type
+definition for STKML 2.1.
+Authors: Gemplus
+-->
+<!-- Generally useful entities -->
+<!-- WML ENTITIES -->
+<!ENTITY quot	"&#34;">
+<!-- quotation mark -->
+<!ENTITY amp	"&#38;#38;">
+<!-- ampersand -->
+<!ENTITY apos	"&#39;">
+<!-- apostrophe -->
+<!ENTITY lt		"&#38;#60;">
+<!-- less than -->
+<!ENTITY gt		"&#62;">
+<!-- greater than -->
+
+<!ENTITY nbsp	"&#160;">
+<!-- non-breaking space -->
+<!ENTITY shy	"&#173;">
+<!-- soft hyphen (discretionary hyphen) -->
+<!--=================== STKML Document =================================-->
+<!--
+The root element STKML contains all other elements.
+STKML 1.2 : card-template ; url mandatory
+-->
+<!ELEMENT stkml (variable-list?, url?, string-table?,card-template?,card+) >
+<!ATTLIST stkml
+	encoding-type 	(sms|ucs2)	"sms"
+	static			(yes|no)	"no"
+>
+<!--=================== Card Element ===================================-->
+<!--
+Card is a single STKML unit of navigation and user interface.
+-->
+<!--======STKML 1.2 : 
+	go-back ; manage-contextual-menu-item ; get-env ; init-variable ; 
+	concatenate
+==========-->
+<!--======STKML 1.3 : 
+	encrypt ; decrypt ; switch 
+==========-->
+<!--======STKML 2.1 : 
+	assign-and-go 
+==========-->
+
+<!ENTITY % ui-content "display|input|select|go|go-back|switch|assign-and-go" >
+<!ENTITY % security-content "verify-pin" >
+<!ENTITY % tel-server-content "set-up-call|provide-local-info|play-tone" >
+<!ENTITY % stk-content "stk-command|plug-in" >
+<!ENTITY % navigation-content "manage-contextual-menu-item" >
+<!ENTITY % variable-management-content "get-env|init-variable" >
+<!ENTITY % encryption-content "encrypt|decrypt" >
+<!ENTITY % string-management-content "concatenate" >
+<!ENTITY % card-content '%ui-content;|%security-content;|%tel-server-content;|%stk-content;|%navigation-content;|%variable-management-content;|%encryption-content;|%string-management-content;|exit' >
+<!ELEMENT card (name?, variable-table?, navigation?, (%card-content;)+) >
+<!--======STKML 1.2 : attr:
+do-not-use-template 
+chain-next-card
+do-not-historize 			==========-->
+<!ATTLIST card
+	id CDATA #IMPLIED
+	newcontext		(yes|no)	"no"
+	back-next-in-card-nav	(yes|no)	"yes"
+	homepage-in-card-nav	(yes|no)	"yes"
+	do-not-historize		(yes|no)	"no"
+	do-not-use-template		(yes|no)	"no"
+	chain-next-card 		(yes|no)	"no">
+<!--=================== basic Elements =================================-->
+<!--======STKML 1.2 : attr:encoding-type ========== -->
+<!ELEMENT text (#PCDATA)>
+<!ATTLIST text
+	type (hexa | text) "text"
+	encoding-type 	(sms|ucs2)	"sms"
+>
+<!ELEMENT name (#PCDATA)>
+<!--======STKML 1.1 : data ==========-->
+<!--======STKML 1.2 : attr:encoding-type ========== -->
+<!ELEMENT data (#PCDATA)>
+<!ATTLIST data
+	type	(hexa|text)	"text"
+	encoding-type 	(sms|ucs2)	"sms"
+>
+<!--============================= Card template ============================-->
+<!--======STKML 1.2 : card-template ==========-->
+<!--
+Card template is a model for each card of the deck (if not specified in the card itself)
+-->
+<!ENTITY % card-template-content '%stk-content;|%navigation-content;' >
+<!ELEMENT card-template (variable-table?,(%card-template-content;)+) >
+<!--=====STKML 1.2 : attr:var-ref, str-ref, coding, encoding-type =========-->
+<!ELEMENT variable (#PCDATA)>
+<!ATTLIST variable
+	id	CDATA	#REQUIRED
+	var-ref	CDATA	#IMPLIED
+	str-ref	CDATA	#IMPLIED
+	coding	CDATA	#IMPLIED
+	type (hexa | text) "text"
+	encoding-type 	(sms|ucs2)	"sms"
+>
+<!--=================== Variable-table & Variable Elements ==================-->
+<!ELEMENT variable-table (variable)+>
+<!ELEMENT variable-ref (#PCDATA)>
+<!ENTITY % string-content "(string|string-ref|text)" >
+<!--======STKML 1.2 : title ==========-->
+<!-- A title for select and go -->
+<!ELEMENT title (variable-ref|%string-content;)>
+<!--======STKML 1.2 : init-variable ==========-->
+<!ELEMENT init-variable (variable)+>
+<!ELEMENT variable-list (variable-ref+) >
+<!--======STKML 1.2 : get-env ==========-->
+<!ELEMENT get-env (text)>
+<!ATTLIST get-env
+	var-ref	CDATA	#REQUIRED
+>
+<!--=================== string-table & String Elements =================-->
+<!ELEMENT string-table (string|text)+>
+<!ELEMENT string (text|variable-ref)+ >
+<!ELEMENT string-ref (#PCDATA)>
+<!--=================== navigation Element =============================-->
+<!ELEMENT navigation (hyper-link)+>
+<!ATTLIST navigation
+	static-back-next (yes | no) "no"
+>
+<!--======STKML 1.2 : menu-item ==========-->
+<!--
+menu-item describes an item in a contextual menu
+-->
+<!ELEMENT menu-item EMPTY>
+<!ATTLIST menu-item
+	menu-id		(back|help|abort|other)		"back"
+	system		(yes|no)			"no"
+	operator		(yes|no)			"no"
+	item-id		CDATA		#REQUIRED
+>
+<!--======STKML 1.2 : manage-contextual-menu-item==========-->
+<!ELEMENT manage-contextual-menu-item (menu-item,hyper-link?)>
+<!ATTLIST manage-contextual-menu-item
+	remove		(yes|no)	"no"
+>
+<!--=================== User Elements =================================-->
+<!--=================== Display Element ===============================-->
+<!ELEMENT display %string-content; >
+<!ATTLIST display 
+	delay 	(yes|no) "no"
+>
+<!--=================== Input Element ==============================-->
+<!--======STKML 1.2 : default-value==========-->
+<!ELEMENT input (response-length, default-value?, variable-ref,%string-content;)>
+<!--======STKML 1.2 : attr : input-type==========-->
+<!ATTLIST input
+	format (digits|alphanum) "alphanum"
+	type (text|password) "text"
+	input-type (sms|ucs2) "sms"
+>
+<!--======STKML 1.2 : default-value==========-->
+<!ELEMENT default-value (variable-ref | %string-content;)>
+<!ELEMENT response-length EMPTY>
+<!ATTLIST response-length
+	min	CDATA	#REQUIRED
+	max	CDATA	#REQUIRED
+>
+<!--=================== Select Element ============================-->
+<!--======STKML 1.2 :  title ?==========-->
+<!ELEMENT select (variable-ref, title?, item+)>
+<!ELEMENT item	(%string-content;, (value|variable-ref))>
+<!--======STKML 1.2 : attr:
+encoding-type 
+var-ref
+str-ref
+========== -->
+<!ELEMENT value (#PCDATA)>
+<!ATTLIST value
+	encoding-type 	(sms|ucs2)	"sms"
+	var-ref	CDATA	#IMPLIED
+	str-ref	CDATA	#IMPLIED
+	type (hexa | text) "text"
+>
+<!--=================== go and hyper link Element ====================-->
+<!--======STKML 1.2 : title?==========-->
+<!ELEMENT go (title?, hyper-link+)>
+<!--======STKML 1.2==========-->
+<!ELEMENT go-back EMPTY>
+<!ATTLIST go-back
+	restart-current-card 	(yes|no)	"no"
+>
+<!ELEMENT hyper-link ((%string-content;)?, url?, parameters?)>
+<!--=====STKML 1.2 : attr:send-referer, attr:no-wait=========-->
+<!ATTLIST hyper-link
+	url		CDATA	#IMPLIED
+	method 		(post|get)	"get"
+	send-referer	(yes|no)	"no"
+	no-wait		(yes|no)	"no"
+>
+<!--=====STKML 1.2 : attr:var-ref=========-->
+<!ELEMENT url	(#PCDATA)>
+<!ATTLIST url
+	type	(sola|smartcard|alias)	"sola"
+	var-ref			CDATA 		#IMPLIED	
+	str-ref CDATA #IMPLIED
+>
+<!ELEMENT parameters (parameter+) >
+<!ELEMENT parameter (#PCDATA)>
+<!ATTLIST parameter
+	id	CDATA		#REQUIRED
+	var-ref	CDATA	#IMPLIED
+	str-ref CDATA #IMPLIED
+>
+<!--=================== plug-in Element =======================-->
+<!--======STKML 1.1 : plug-in ==========-->
+<!ELEMENT plug-in (manufacturer, reference, input-list?, variable-list?)>
+<!ATTLIST plug-in
+	exit 	(yes|no)	"no"
+>
+<!ELEMENT manufacturer	(#PCDATA)>
+<!ELEMENT reference	(#PCDATA)>
+<!ELEMENT input-list	(variable-ref|text|variable-list)+ >
+<!--=================== exit Element =======================-->
+<!--=====STKML 1.2 : attr:clean-buffer =========-->
+<!ELEMENT exit (variable-list?)>
+<!ATTLIST exit
+	clean-buffer	(yes|no)	"no"
+>
+<!--=================== concatenate Element =======================-->
+<!--===== STKML 1.2 =========-->
+<!ELEMENT concatenate (variable-ref|text)+>
+<!ATTLIST concatenate
+	id	CDATA	#REQUIRED
+>
+<!--=================== Security Elements =============================-->
+<!--====================== verify pin Element =========================-->
+<!ELEMENT verify-pin (#PCDATA)>
+<!ATTLIST verify-pin
+	var-ref CDATA #REQUIRED
+>
+<!--======STKML 1.3 : encrypt ==========-->
+<!ELEMENT parameter-list	(variable-ref|text)+ >
+<!--
+encrypt allows a content provider to request a secured value from the browser 
+-->
+<!ELEMENT encrypt (parameter-list)>
+<!ATTLIST encrypt
+	SPI		CDATA	#REQUIRED
+	Kic		CDATA	#REQUIRED
+	Kid		CDATA	#REQUIRED
+	var-ref	CDATA	#REQUIRED 
+>
+<!--======STKML 1.3 : decrypt ==========-->
+<!--
+decrypt allows a content provider to send a secured value to the browser 
+-->
+<!ELEMENT decrypt ((variable-ref | text),variable-list)>
+<!ATTLIST decrypt
+	SPI		CDATA	#IMPLIED
+	Kic		CDATA	#IMPLIED
+	Kid		CDATA	#IMPLIED
+>
+<!--======STKML 1.3 : switch/case ==========-->
+<!ELEMENT switch (variable-ref,case-item+,hyper-link?)>
+<!ATTLIST switch
+	case-sensitive (yes|no)	"yes"
+>
+
+<!ELEMENT case-item (value, hyper-link)>
+
+<!--======STKML 2.1 : assign-and-go ==========-->
+<!ELEMENT assign-and-go (variable-ref, title?, attachment-point+)>
+
+<!ELEMENT attachment-point ((value|variable-ref)?, counter-index?, hyper-link?)>
+<!ATTLIST attachment-point
+    length    CDATA		#IMPLIED
+	activate (yes|no)	"yes"
+	service  (yes|no)   "yes"
+>
+
+<!ELEMENT counter-index (#PCDATA)>
+
+<!--=================== Mobile Interaction Elements ===================-->
+<!--======STKML 1.1 : stk-command ==========-->
+<!ELEMENT stk-command (type, qualifier, destination, tlv*, stk-result-variable-ref?)>
+<!ATTLIST stk-command
+	encapsulate	(yes|no)	"no"
+>
+<!ELEMENT type	(#PCDATA)>
+<!ELEMENT qualifier	(#PCDATA)>
+<!ELEMENT destination	(#PCDATA)>
+<!ELEMENT tlv	(data*)>
+<!--======STKML 1.2 : attr:str-ref ========== -->
+<!ATTLIST tlv
+	id	CDATA	#REQUIRED
+	var-ref	CDATA	#IMPLIED
+	str-ref	CDATA	#IMPLIED
+>
+<!ELEMENT stk-result-variable-ref (#PCDATA)>
+<!--=================== Telephony / server Elements ===================-->
+<!--====================== Setup Call Element =========================-->
+<!--======STKML 1.1 : title, variable-ref|%string-content;==========-->
+<!ELEMENT set-up-call (title?,(variable-ref|%string-content;))>
+<!--======STKML 1.1 : attr:qualifier, attr:confirm-call==========-->
+<!ATTLIST set-up-call
+	qualifier	CDATA	#IMPLIED
+	confirm-call	CDATA	#IMPLIED	
+>
+<!--====================== Provide Local Info Element =================-->
+<!--======STKML 1.2 : attr:network ==========-->
+<!ENTITY % local-info-type "(location|imei|me-capabilities|sim-capabilities|network|browser-version)">
+<!ELEMENT provide-local-info (variable-ref)>
+<!ATTLIST provide-local-info
+	l-info-type	%local-info-type;	#REQUIRED
+>
+<!--====================== play-tone =================-->
+<!--======STKML 1.1 : title ==========-->
+<!ELEMENT play-tone (title?,tone)>
+<!--======STKML 1.1 : attr:duration , attr : type==========-->
+<!ELEMENT tone EMPTY>
+<!ATTLIST tone
+	type		(minutes | secondes | tenth-secondes) "secondes"
+	duration	CDATA	#IMPLIED
+	value		CDATA	#REQUIRED
+>

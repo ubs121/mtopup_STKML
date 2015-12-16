@@ -1,0 +1,407 @@
+<!DOCTYPE stkml SYSTEM "stkml2_1.dtd">
+<stkml static="yes">
+	<!-- Global huvisagch -->
+	<variable-list>
+		<variable-ref>access-code</variable-ref>
+		<variable-ref>confirm-txt</variable-ref>
+		<variable-ref>sub-type</variable-ref>
+		<variable-ref>cenegleh-dugaar</variable-ref>
+		<variable-ref>send-data</variable-ref>
+		<variable-ref>splitChar</variable-ref>
+		<variable-ref>endChar</variable-ref>
+		<variable-ref>confirmTxt</variable-ref>
+		<variable-ref>chooseType</variable-ref>
+		<variable-ref>askCode</variable-ref>
+		<variable-ref>USSDResult</variable-ref>
+    <variable-ref>taslal</variable-ref>
+	</variable-list>
+
+
+  <!-- ******************   -->
+  <!-- Mobile dealer  -->
+  <!-- Ehnii huudas   -->
+  <!-- ******************   -->
+  <card id="0">
+    <variable-table>
+      <variable id="splitChar">*</variable>
+      <variable id="endChar">#</variable>
+      <variable id="confirmTxt">Batalgaajuulax: </variable>
+      <variable id="askCode">Nuuc kod?</variable>
+      <variable id="chooseType">Kart aa songono uu</variable>
+      <variable id="taslal">,</variable>
+    </variable-table>
+		<go>
+			<hyper-link url="#1">
+				<text>Ceneglex</text>
+			</hyper-link>
+			<hyper-link url="#2">
+				<text>Uldegdel shalgax</text>
+			</hyper-link>
+			<hyper-link url="#3">
+				<text>Nuuc dugaar solix</text>
+			</hyper-link>
+			<!--hyper-link url="#4">
+				<text>Menu shinechlex</text>
+			</hyper-link -->
+		</go>
+	</card>
+	<!-- ******************   -->
+	<!-- 1. Ceneglex huudas   -->
+	<!--        START         -->
+	<!-- ******************   -->
+	<card id="1">
+		<go>
+			<hyper-link url="#11">
+				<text>MobiCard</text>
+			</hyper-link>
+			<hyper-link url="#12">
+				<text>GlobusCard</text>
+			</hyper-link>
+			<hyper-link url="#13">
+				<text>Web2Call &amp; Internet</text>
+			</hyper-link>
+			<!-- TODO: hyper-link url="#14">
+				<text>Web2CALL</text>
+			</hyper-link-->
+			<hyper-link url="#15">
+				<text>UlusnetCard</text>
+			</hyper-link>
+		</go>
+	</card>
+	<!-- 1.1 Mobicard tsenegleh huudas   -->
+	<card id="11">
+		<variable-table>
+			<variable id="access-code">190</variable>
+			<variable id="confirm-txt">MobiCard</variable>
+		</variable-table>
+		<select>
+			<variable-ref>sub-type</variable-ref>      
+			<title>
+				<variable-ref>chooseType</variable-ref>
+			</title>
+			<item>
+				<text>500 tug</text>
+				<value>500</value>
+			</item>
+			<item>
+				<text>1000 tug</text>
+				<value>1000</value>
+			</item>
+			<item>
+				<text>2500 tug</text>
+				<value>2500</value>
+			</item>
+			<item>
+				<text>6500 tug</text>
+				<value>6500</value>
+			</item>
+			<item>
+				<text>10000 tug</text>
+				<value>10000</value>
+			</item>
+			<item>
+				<text>8000 tug / 30x</text>
+				<value>8000</value>
+			</item>
+			<item>
+				<text>15000 tug / 60x</text>
+				<value>15000</value>
+			</item>
+			<item>
+				<text>15400 tug / 90x</text>
+				<value>15400</value>
+			</item>
+			<item>
+				<text>21000 tug / 90x</text>
+				<value>21000</value>
+			</item>
+			<item>
+				<text>30000 tug</text>
+				<value>30000</value>
+			</item>
+		</select>
+		<go>
+			<hyper-link url="#111"/>
+		</go>
+	</card>
+	<!-- 1.2 Globuscard tsenegleh  huudas   -->
+	<card id="12">
+		<variable-table>
+			<variable id="access-code">192</variable>
+			<variable id="confirm-txt">GlobusCard</variable>
+		</variable-table>
+		<select>
+			<variable-ref>sub-type</variable-ref>
+			<title>
+				<variable-ref>chooseType</variable-ref>
+			</title>
+			<item>
+				<text>3000 tug</text>
+				<value>3000</value>
+			</item>
+			<item>
+				<text>5500 tug</text>
+				<value>5500</value>
+			</item>
+			<item>
+				<text>8800 tug</text>
+				<value>8800</value>
+			</item>
+			<item>
+				<text>11000 tug</text>
+				<value>11000</value>
+			</item>
+		</select>
+		<go>
+			<hyper-link url="#111"/>
+		</go>
+	</card>
+	<!-- 1.3 Web2Call and Internet tsenegleh  huudas   -->
+	<card id="13">
+		<variable-table>
+			<variable id="access-code">191</variable>
+			<variable id="confirm-txt">Web2Call &amp; Internet</variable>
+		</variable-table>
+		<select>
+			<variable-ref>sub-type</variable-ref>
+			<title>
+				<variable-ref>chooseType</variable-ref>
+			</title>
+			<item>
+				<text>1500 tug</text>
+				<value>1500</value>
+			</item>
+			<item>
+				<text>2500 tug</text>
+				<value>2500</value>
+			</item>
+			<item>
+				<text>5000 tug</text>
+				<value>5000</value>
+			</item>
+			<item>
+				<text>10000 tug</text>
+				<value>10000</value>
+			</item>
+		</select>
+		<go>
+			<hyper-link url="#111"/>
+		</go>
+	</card>
+	<!-- 1.4 Web2Call tsenegleh  huudas  
+	<card id="14">
+		<variable-table>
+			<variable id="access-code">193</variable>
+			<variable id="confirm-txt">Web2Call</variable>
+		</variable-table>
+		<select>
+			<variable-ref>sub-type</variable-ref>
+			<title>
+				<text>Cartaa songo</text>
+			</title>
+			<item>
+				<text>1500 tug</text>
+				<value>1500 </value>
+			</item>
+			<item>
+				<text>2500 tug</text>
+				<value>2500 </value>
+			</item>
+		</select>
+		<go>
+			<hyper-link url="#111"/>
+		</go>
+	</card> -->
+	<!-- 1.5 UlusnetCard tsenegleh  huudas   -->
+	<card id="15">
+		<variable-table>
+			<variable id="access-code">193</variable>
+			<variable id="confirm-txt">UlusnetCard</variable>
+		</variable-table>
+		<select>
+			<variable-ref>sub-type</variable-ref>
+			<title>
+				<variable-ref>chooseType</variable-ref>
+			</title>
+			<item>
+				<text>25000 tug/30 xon</text>
+				<value>25000</value>
+			</item>
+			<item>
+				<text>44000 tug /30xon/1GB</text>
+				<value>44000</value>
+			</item>
+		</select>
+		<go>
+			<hyper-link url="#111"/>
+		</go>
+	</card>
+	<!--          Ilgeeh dugaar asuuh heseg         -->
+	<card id="111">
+		<input format="digits">
+			<response-length min="8" max="8"/>
+			<variable-ref>cenegleh-dugaar</variable-ref>
+			<string>
+				<text>Cenegleh dugaar</text>
+			</string>
+		</input>
+		<go>
+			<hyper-link url="#112"/>
+		</go>
+	</card>
+	<!--          Batalgaajuulah heseg         -->
+	<card id="112">
+		<display>
+			<string>				
+				<variable-ref>confirmTxt</variable-ref>				
+			  <variable-ref>taslal</variable-ref>
+        <variable-ref>sub-type</variable-ref>
+			  <variable-ref>taslal</variable-ref>
+        <variable-ref>cenegleh-dugaar</variable-ref>
+        <text>.</text>
+			</string>
+		</display>
+		<go>
+			<hyper-link url="#113"/>
+		</go>
+	</card>
+	<!-- Nuuts dugaaraa oruulah heseg -->
+	<card id="113">
+		<input type="password" format="digits">
+			<response-length min="5" max="5"/>
+			<variable-ref>pin</variable-ref>
+			<string>
+				<variable-ref>askCode</variable-ref>
+			</string>
+		</input>
+		<!-- Send Data format beltgeh -->
+		<concatenate id="send-data">
+			<variable-ref>splitChar</variable-ref>
+			<variable-ref>access-code</variable-ref>
+			<variable-ref>splitChar</variable-ref>
+			<variable-ref>cenegleh-dugaar</variable-ref>
+			<variable-ref>splitChar</variable-ref>
+			<variable-ref>sub-type</variable-ref>
+			<variable-ref>splitChar</variable-ref>
+			<variable-ref>pin</variable-ref>
+			<variable-ref>endChar</variable-ref>
+		</concatenate>
+		<go>
+			<hyper-link url="#99"/>
+		</go>
+	</card>
+	<!--          END         -->
+	<!-- ******************   -->
+	<!-- *************************   -->
+	<!-- 2. Uldegdel shalgah heseg   -->
+	<!--            START            -->
+	<!-- *************************   -->
+	<card id="2">
+		<variable-table>
+			<variable id="access-code">140</variable>
+		</variable-table>
+		<input type="password" format="digits">
+			<response-length min="5" max="5"/>
+			<variable-ref>MPIN</variable-ref>
+			<string>
+				<variable-ref>askCode</variable-ref>
+			</string>
+		</input>
+		<concatenate id="send-data">
+			<variable-ref>splitChar</variable-ref>
+			<variable-ref>140</variable-ref>
+			<variable-ref>splitChar</variable-ref>
+			<variable-ref>MPIN</variable-ref>
+			<variable-ref>endChar</variable-ref>
+		</concatenate>
+		<go>
+			<hyper-link url="#99"/>
+		</go>
+	</card>
+	<!--             END             -->
+	<!-- *************************   -->
+	<!-- ***************************   -->
+	<!-- 3. Nuuts dugaar solih heseg   -->
+	<!--             START             -->
+	<!-- ***************************   -->
+	<card id="3">
+		<variable-table>
+			<variable id="access-code">147</variable>
+		</variable-table>
+		<input type="password" format="digits">
+			<response-length min="5" max="5"/>
+			<variable-ref>OldMPIN</variable-ref>
+			<string>
+				<text>Odoogiin nuuc kod</text>
+			</string>
+		</input>
+		<input type="password" format="digits">
+			<response-length min="5" max="5"/>
+			<variable-ref>NewMPIN</variable-ref>
+			<string>
+				<text>Shine nuuc kod?</text>
+			</string>
+		</input>
+		<concatenate id="send-data">
+			<variable-ref>splitChar</variable-ref>
+			<variable-ref>147</variable-ref>
+			<variable-ref>splitChar</variable-ref>
+			<variable-ref>OldMPIN</variable-ref>
+			<variable-ref>splitChar</variable-ref>
+			<variable-ref>NewMPIN</variable-ref>
+			<variable-ref>endChar</variable-ref>
+		</concatenate>
+		<go>
+			<hyper-link url="#99"/>
+		</go>
+	</card>
+	<!--              END              -->
+	<!-- ***************************   -->
+	<!-- ***************************   -->
+	<!-- 4. Menu shinechileh heseg   -->
+	<!--             START             -->
+	<!-- ***************************   -->
+	<!--card id="4">
+		<plug-in exit="yes">
+		<manufacturer>02</manufacturer>
+		<reference>7F</reference>
+		<input-list>
+			<text type="hexa">01000004</text>
+			<text type="text"/>
+			<text type="hexa"/>
+			<text type="hexa">00A185F6</text>
+			<text type="text">MD</text>        
+		</input-list>
+		</plug-in>
+	</card-->
+	<!--              END              -->
+	<!-- ***************************   -->
+	<!-- Eronhii dund ne ashiglaj baigaa carduud -->
+	<!-- USSD eer ilgeeh heseg -->
+	<card id="99">
+    <concatenate id="send-data">
+      <text type="hexa">44</text>
+      <variable-ref>send-data</variable-ref>
+    </concatenate>
+    
+		<stk-command>
+			<type>12</type>
+			<qualifier>00</qualifier>
+			<destination>83</destination>
+      <tlv id="05">
+        <data type="text">Top Up...</data>
+      </tlv>
+      <tlv id="8A" var-ref="send-data">
+			</tlv>
+			<stk-result-variable-ref>USSDResult</stk-result-variable-ref>
+		</stk-command>
+		<display>
+			<string>
+				<variable-ref>USSDResult</variable-ref>
+			</string>      
+		</display>
+		<go>
+			<hyper-link url="#0"/>
+		</go>
+	</card>
+</stkml>
